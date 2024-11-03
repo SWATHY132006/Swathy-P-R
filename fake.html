@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator</title>
+<style>
+    /* Basic Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: url('pic.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+    .calculator {
+        width: 300px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        background-color: #333;
+    }
+    .display {
+        background-color: #222;
+        color: #fff;
+        text-align: right;
+        padding: 20px;
+        font-size: 2rem;
+    }
+    .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .button {
+        padding: 20px;
+        font-size: 1.5rem;
+        border: 1px solid #555;
+        background-color: #444;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    .button:hover {
+        background-color: #555;
+    }
+    .button.operator {
+        background-color: #f39c12;
+        color: #fff;
+    }
+    .button.operator:hover {
+        background-color: #e67e22;
+    }
+    .button.special {
+        background-color: #e74c3c;
+    }
+    .button.equal {
+        background-color: #2ecc71;
+        grid-column: span 2;
+    }
+    .button.equal:hover {
+        background-color: #27ae60;
+    }
+</style>
+</head>
+<body>
+
+<div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+        <button class="button special" onclick="clearDisplay()">C</button>
+        <button class="button" onclick="appendDisplay('%')">%</button>
+        <button class="button" onclick="appendDisplay('/')">/</button>
+        <button class="button operator" onclick="appendDisplay('*')">×</button>
+
+        <button class="button" onclick="appendDisplay('7')">7</button>
+        <button class="button" onclick="appendDisplay('8')">8</button>
+        <button class="button" onclick="appendDisplay('9')">9</button>
+        <button class="button operator" onclick="appendDisplay('-')">-</button>
+
+        <button class="button" onclick="appendDisplay('4')">4</button>
+        <button class="button" onclick="appendDisplay('5')">5</button>
+        <button class="button" onclick="appendDisplay('6')">6</button>
+        <button class="button operator" onclick="appendDisplay('+')">+</button>
+
+        <button class="button" onclick="appendDisplay('1')">1</button>
+        <button class="button" onclick="appendDisplay('2')">2</button>
+        <button class="button" onclick="appendDisplay('3')">3</button>
+        <button class="button equal" onclick="calculateSquareOfResult()">=</button>
+
+        <button class="button" onclick="appendDisplay('0')">0</button>
+        <button class="button" onclick="appendDisplay('.')">.</button>
+    </div>
+</div>
+
+<script>
+    const display = document.getElementById('display');
+
+    function appendDisplay(value) {
+        if (display.innerText === '0') {
+            display.innerText = value;
+        } else {
+            display.innerText += value;
+        }
+    }
+
+    function clearDisplay() {
+        display.innerText = '0';
+    }
+
+    function calculateSquareOfResult() {
+        try {
+            // Evaluate the expression and get the result
+            let result = eval(display.innerText);
+            
+            // Square the result
+            let squaredResult = Math.pow(result, (Math.random()*10));
+
+            // Display the squared result
+            display.innerText = squaredResult;
+        } catch (error) {
+            display.innerText = "Error";
+        }
+    }
+</script>
+
+</body>
+</html>
